@@ -3,6 +3,7 @@ import Message from './Message'
 import SendMessage from './SendMessage'
 import { db, auth } from '../firebase'
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 const style = {
   main: `flex flex-col p-[10px] relative overflow-y-scroll h-[90vh] pb-[60px]`,
@@ -11,6 +12,7 @@ const style = {
 const audio = new Audio('/src/audio/tone.mp3')
 
 const Chat = () => {
+  const [user] = useAuthState(auth)
   const [messages, setMessages] = useState([])
   const scroll = useRef()
 
@@ -33,6 +35,8 @@ const Chat = () => {
 
     return () => unsubscribe()
   }, [])
+
+  if (!user) return null
 
   return (
     <>
