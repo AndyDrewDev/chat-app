@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { auth, db } from '../firebase'
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import EmojiPicker from 'emoji-picker-react'
 import EmojiButton from './EmojiButton'
+import { sendMessageToDb } from '../utils/sendMessageToDb'
 
 const style = {
   form: `h-14 w-full max-w-[728px] flex text-xl absolute bottom-0`,
@@ -23,15 +22,12 @@ const SendMessage = ({ scroll }) => {
       return
     }
     e.preventDefault()
-    const { uid, displayName } = auth.currentUser
-    await addDoc(collection(db, 'messages'), {
-      text: input,
-      name: displayName,
-      uid,
-      timestamp: serverTimestamp(),
-    })
+    await sendMessageToDb(input)
     setInput('')
-    scroll.current.scrollTop = scroll.current.scrollHeight
+
+    if (scroll?.current) {
+      scroll.current.scrollTop = scroll.current.scrollHeight
+    }
   }
 
   const handleEmojiClick = (emojiData) => {
