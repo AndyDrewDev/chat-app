@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import { auth } from '../firebase'
 import Linkify from 'react-linkify'
+import { formatDateTime } from '../utils/date'
 
 const style = {
   message: `relative min-w-[150px] items-center shadow-xl px-3 py-2 m-4 rounded-tl-[16px] rounded-tr-[16px] text-underline`,
@@ -12,26 +14,22 @@ const style = {
 }
 const Message = ({ message }) => {
   if (!message) return
-  const date = message?.timestamp?.toDate()
-  const formattedDate = date
-    ? date.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        seconds: 'numeric',
-        hour12: true,
-      })
-    : 'sending...'
 
-  // console.log(message, date)
-  return message.uid === auth.currentUser.uid ? (
-    <div className={`${style.message} ${style.sent}`}>
-      <span className={`${style.name} right-1 text-end`}>{message.name}</span>
-      <Linkify>
-        <p className={`${style.sent} text-start`}>{message.text}</p>
-      </Linkify>
-      <span className={style.messageTimeLeft}>{formattedDate}</span>
-    </div>
-  ) : (
+  const date = message?.timestamp?.toDate()
+  const formattedDate = formatDateTime(date)
+
+  if (message.uid === auth.currentUser.uid) {
+    return (
+      <div className={`${style.message} ${style.sent}`}>
+        <span className={`${style.name} right-1 text-end`}>{message.name}</span>
+        <Linkify>
+          <p className={`${style.sent} text-start`}>{message.text}</p>
+        </Linkify>
+        <span className={style.messageTimeLeft}>{formattedDate}</span>
+      </div>
+    )
+  }
+  return (
     <div className={`${style.message} ${style.received}`}>
       <span className={`${style.name} left-1`}>{message.name}</span>
       <Linkify>
