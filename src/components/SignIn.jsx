@@ -1,17 +1,8 @@
-import { auth } from '../firebase'
-import {
-  GoogleAuthProvider,
-  //   signInWithRedirect,
-  signInWithPopup,
-} from 'firebase/auth'
 import GoogleButton from 'react-google-button'
+import { googleSignIn } from '../utils/auth'
 
 const style = {
   wrapper: `flex justify-center`,
-}
-const googleSignIn = async () => {
-  const provider = new GoogleAuthProvider()
-  await signInWithPopup(auth, provider)
 }
 
 const SignIn = () => {
