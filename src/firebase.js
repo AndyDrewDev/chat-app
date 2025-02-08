@@ -1,18 +1,14 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth } from 'firebase/auth'
 import { getFirestore, Timestamp } from 'firebase/firestore'
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyDvM64ykps3LBH60ONpMRz7CNqBz3nFZBI',
-  authDomain: 'chatapp-6f94a.firebaseapp.com',
-  projectId: 'chatapp-6f94a',
-  storageBucket: 'chatapp-6f94a.firebasestorage.app',
-  messagingSenderId: '203536820526',
-  appId: '1:203536820526:web:96c76be666122f2e4272bf',
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
 }
 
 // Initialize Firebase

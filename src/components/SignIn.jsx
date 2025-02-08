@@ -1,5 +1,5 @@
 import GoogleButton from 'react-google-button'
-import { googleSignIn } from '../utils/auth'
+import { googleSignIn } from '../auth/googleProvider'
 
 const style = {
   wrapper: `flex justify-center`,

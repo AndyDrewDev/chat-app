@@ -1,4 +1,4 @@
-import { auth, db } from './firebase'
+import { auth, db } from '../firebase'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
 export const sendMessageToDb = async (input) => {
