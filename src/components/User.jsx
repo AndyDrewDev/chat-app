@@ -1,18 +1,26 @@
 import { auth } from "../firebase";
 
 const style = {
-  wrapper: `flex flex-row  items-center `,
-  userPhoto: `color-white border-white-400 mx-6 h-10 w-10 rounded-full border-[1.5px]`,
-  userName: `text-md ml-12 font-bold text-white`,
+  wrapper: `flex items-center justify-center`,
+  userPhoto: `ml-1 h-9 w-9 md:h-10 md:w-10 rounded-full border-2 border-white`,
+  photoPlaceholder: `ml-1 h-9 w-9 md:h-10 md:w-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-800 text-xs md:text-sm border-2 border-white`,
 };
 
 const User = () => {
-  const photoURL = auth.currentUser.photoURL;
+  const { photoURL, displayName } = auth.currentUser;
+  const initial = displayName?.charAt(0)?.toUpperCase() || "?";
 
   return (
     <div className={style.wrapper}>
-      <span className={style.userName}>{auth.currentUser.displayName}</span>
-      <img className={style.userPhoto} src={photoURL} alt="user-photo" />
+      {photoURL ? (
+        <img
+          className={style.userPhoto}
+          src={photoURL}
+          alt={`${displayName} photo`}
+        />
+      ) : (
+        <div className={style.photoPlaceholder}>{initial}</div>
+      )}
     </div>
   );
 };

@@ -1,19 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EmojiPicker from "emoji-picker-react";
 import EmojiButton from "./EmojiButton";
 import { sendMessageToDb } from "../utils/sendMessageToDb";
 
 const style = {
-  form: `w-full bg-gray-800 p-3 text-xl rounded-lg`,
-  textarea: `mb-2 field-sizing-content max-h-40 min-h-20 w-[100%] resize-none rounded-xl bg-gray-700 px-4 py-4 text-xl text-white `,
-  button: `rounded-xl bg-[#395dff] px-6 text-white hover:bg-green-500`,
+  form: `w-full bg-gray-800 p-2 md:p-3 text-base md:text-xl rounded-t-lg md:rounded-lg sticky bottom-0`,
+  bottomContent: `flex justify-between items-center`,
+  textarea: `mb-2 field-sizing-content max-h-20 md:max-h-40 min-h-[40px] w-[100%] resize-none rounded-xl bg-gray-700 px-3 md:pr-4 py-2 md:py-4 text-base md:text-xl text-white`,
+  button: `rounded-xl bg-[#395dff] px-3 md:px-6 py-1 md:py-2 text-white hover:bg-green-500 text-sm md:text-base`,
+  buttonsContainer: `flex justify-end items-center`,
+  emojiButtonContainer: `flex justify-start items-center z-10`,
 };
+
 const SendMessage = ({ scroll }) => {
   const [input, setInput] = useState("");
   const [isOpenPicker, setIsOpenPicker] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleKeyDown = async (e) => {
-    if (e.key === "Enter" && !e.ctrlKey && !e.metaKey) {
+    if (
+      e.key === "Enter" &&
+      !e.ctrlKey &&
+      !e.metaKey &&
+      !e.shiftKey &&
+      !isMobile
+    ) {
       e.preventDefault();
       await sendMessage(e);
     } else if (
@@ -36,6 +57,7 @@ const SendMessage = ({ scroll }) => {
     e.preventDefault();
     await sendMessageToDb(input);
     setInput("");
+    setIsOpenPicker(false);
 
     if (scroll?.current) {
       scroll.current.scrollTop = scroll.current.scrollHeight;
@@ -57,8 +79,9 @@ const SendMessage = ({ scroll }) => {
           className={style.textarea}
           type="text"
           placeholder="Type a message..."
+          rows={2}
         />
-        <div className="flex justify-between">
+        <div className={style.bottomContent}>
           <EmojiButton onClick={togglePicker} />
           <button className={style.button} type="submit">
             Send
@@ -68,7 +91,14 @@ const SendMessage = ({ scroll }) => {
       <EmojiPicker
         open={isOpenPicker}
         height={450}
-        style={{ position: "absolute", bottom: "70px", left: "10px" }}
+        width={isMobile ? "100%" : undefined}
+        style={{
+          position: "absolute",
+          bottom: "150px",
+          left: "10px",
+          zIndex: 30,
+          maxWidth: "calc(100% - 20px)",
+        }}
         onEmojiClick={handleEmojiClick}
       />
     </>
