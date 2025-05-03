@@ -6,7 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useMessages } from "../hooks/useMessages";
 
 const style = {
-  main: `flex flex-col p-[10px] relative overflow-y-scroll h-[90vh] pb-[10px]`,
+  main: `flex flex-col p-[10px] relative overflow-y-scroll h-[90vh] pb-[10px] `,
 };
 
 const Chat = () => {
