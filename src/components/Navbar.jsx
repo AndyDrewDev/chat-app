@@ -5,7 +5,7 @@ import SignIn from './SignIn'
 import LogOut from './SignOutButton'
 
 const style = {
-  nav: `bg-gray-800 h-20 flex justify-between items-center p-4`,
+  nav: `bg-gray-800 h-20 flex justify-between items-center p-4 rounded-lg`,
   heading: `text-white text-3xl`,
   user: `flex items-center`,
   // buttonContainer: `flex items-center`,

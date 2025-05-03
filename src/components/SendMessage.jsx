@@ -4,8 +4,8 @@ import EmojiButton from "./EmojiButton";
 import { sendMessageToDb } from "../utils/sendMessageToDb";
 
 const style = {
-  form: `w-full max-w-[728px] bg-gray-800 p-3 text-xl`,
-  textarea: `mb-2 field-sizing-content max-h-40 min-h-20 w-[100%] resize-none rounded-xl bg-gray-700 px-4 py-4 text-xl text-white`,
+  form: `w-full bg-gray-800 p-3 text-xl rounded-lg`,
+  textarea: `mb-2 field-sizing-content max-h-40 min-h-20 w-[100%] resize-none rounded-xl bg-gray-700 px-4 py-4 text-xl text-white `,
   button: `rounded-xl bg-[#395dff] px-6 text-white hover:bg-green-500`,
 };
 const SendMessage = ({ scroll }) => {
