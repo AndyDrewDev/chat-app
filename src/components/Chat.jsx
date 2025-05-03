@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
 import { auth } from "../firebase";
@@ -11,26 +11,15 @@ const style = {
 };
 
 const Chat = () => {
-  const [user] = useAuthState(auth);
   const scroll = useRef();
+  const [user] = useAuthState(auth);
   const { messages } = useMessages(scroll);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (scroll.current && messages.length > 0 && isMobile) {
+    if (scroll.current && messages?.length > 0) {
       scroll.current.scrollTop = scroll.current.scrollHeight;
     }
-  }, [messages, isMobile]);
+  }, [messages]);
 
   if (!user) {
     return (
@@ -45,7 +34,7 @@ const Chat = () => {
   return (
     <>
       <div className={style.main} ref={scroll} data-id="main-chat">
-        {Boolean(messages?.length) ? (
+        {messages?.length > 0 ? (
           messages.map((message) => (
             <Message key={message.id} message={message} />
           ))
