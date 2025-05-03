@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import User from "./User";
@@ -15,6 +16,18 @@ const style = {
 
 const Navbar = ({ toggleUsers }) => {
   const [user] = useAuthState(auth);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <div className={style.nav}>
@@ -31,27 +44,29 @@ const Navbar = ({ toggleUsers }) => {
       <div className={style.actionButtons}>
         {user ? (
           <>
-            <button
-              className={style.userIcon}
-              onClick={toggleUsers}
-              aria-label="Показати список користувачів"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className={style.icon}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            {isMobile ? (
+              <button
+                className={style.userIcon}
+                onClick={toggleUsers}
+                aria-label="Показати список користувачів"
               >
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={style.icon}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </button>
+            ) : null}
             <LogOut />
           </>
         ) : (
