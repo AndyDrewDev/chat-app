@@ -12,7 +12,7 @@ const style = {
   emojiButtonContainer: `flex justify-start items-center z-10`,
 };
 
-const SendMessage = ({ scroll }) => {
+const SendMessage = () => {
   const [input, setInput] = useState("");
   const [isOpenPicker, setIsOpenPicker] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -50,18 +50,14 @@ const SendMessage = ({ scroll }) => {
   };
 
   const sendMessage = async (e) => {
+    e.preventDefault();
     if (input.trim() === "") {
       alert("Please enter a valid message");
       return;
     }
-    e.preventDefault();
     await sendMessageToDb(input);
     setInput("");
     setIsOpenPicker(false);
-
-    if (scroll?.current) {
-      scroll.current.scrollTop = scroll.current.scrollHeight;
-    }
   };
 
   const handleEmojiClick = (emojiData) => {
