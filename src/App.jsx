@@ -8,8 +8,8 @@ import { useState, useEffect } from "react";
 
 const style = {
   appContainer: `max-w-[1024px] h-[100vh] mx-auto px-4 relative`,
-  mainContent: `flex flex-col md:flex-row gap-4 h-[100vh] md:h-[calc(100vh-20px)]`,
-  chatContainer: `flex-1 relative mt-0 md:mt-10 flex flex-col border-none bg-gray-100 shadow-xl h-auto overflow-hidden`,
+  mainContent: `flex flex-col md:flex-row gap-4 flex-1 overflow-hidden md:h-[calc(100vh-20px)]`,
+  chatContainer: `flex-1 relative mt-0 md:mt-10 flex flex-col border-none bg-gray-100 shadow-xl overflow-auto`,
   usersContainer: `mt-2 md:mt-10`,
   mobileUsersOverlay: `fixed inset-0 bg-black/25 z-20 transition-opacity duration-300 ease-in-out`,
   mobileUsersPanel: `rounded-l-xl fixed right-0 top-0 h-full w-3/4 max-w-xs z-30 transform transition-transform duration-300 ease-in-out bg-gray-800 shadow-xl`,

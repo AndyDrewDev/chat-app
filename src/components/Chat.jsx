@@ -5,7 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useMessages } from "../hooks/useMessages";
 
 const style = {
-  main: `flex flex-col p-[5px] md:p-[10px] relative overflow-y-auto flex-1 h-[calc(100vh-170px)] md:h-full`,
+  main: `flex flex-col p-[5px] md:p-[10px] relative overflow-y-scroll h-[calc(100vh-170px)] md:h-full`,
   welcomeMessage: `flex justify-center items-center h-full text-gray-500 text-center p-4 text-sm md:text-base`,
 };
 
