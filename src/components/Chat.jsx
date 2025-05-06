@@ -9,7 +9,7 @@ const style = {
   welcomeMessage: `flex items-center justify-center text-gray-500 text-center p-4 text-base h-full `,
 };
 
-const audio = new Audio("/src/audio/tone.mp3");
+const audio = new Audio("/audio/tone.mp3");
 
 const Chat = () => {
   const scroll = useRef();
