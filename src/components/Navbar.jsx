@@ -6,7 +6,7 @@ import SignIn from "./SignIn";
 import LogOut from "./SignOutButton";
 
 const style = {
-  nav: `relative flex min-h-[64px] items-center rounded-b-lg bg-gray-800 p-2 md:p-4`,
+  nav: `sticky top-0 flex min-h-[64px] items-center rounded-b-lg bg-gray-800 p-2 md:p-4`,
   heading: `text-white text-xl md:text-2xl font-bold absolute left-1/2 transform -translate-x-1/2`,
   userContainer: ``,
   actionButtons: `flex items-center gap-2 md:gap-4 ml-auto`,
