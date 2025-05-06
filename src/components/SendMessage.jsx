@@ -4,7 +4,7 @@ import EmojiButton from "./EmojiButton";
 import { sendMessageToDb } from "../utils/sendMessageToDb";
 
 const style = {
-  form: `w-full bg-gray-800 p-2 md:p-3 text-base md:text-xl rounded-t-lg md:rounded-lg sticky bottom-0`,
+  form: `w-full bg-gray-800 p-2 md:p-3 text-base md:text-xl rounded-t-lg sticky bottom-0`,
   bottomContent: `flex justify-between items-center`,
   textarea: `mb-2 field-sizing-content max-h-20 md:max-h-40 min-h-[40px] w-[100%] resize-none rounded-xl bg-gray-700 px-3 md:pr-4 py-2 md:py-4 text-base md:text-xl text-white`,
   button: `rounded-xl bg-[#395dff] px-3 md:px-6 py-1 md:py-2 text-white hover:bg-green-500 text-sm md:text-base`,
@@ -87,7 +87,7 @@ const SendMessage = () => {
       <EmojiPicker
         open={isOpenPicker}
         height={450}
-        width={isMobile ? "100%" : undefined}
+        width={isMobile ? "75%" : undefined}
         style={{
           position: "absolute",
           bottom: "150px",

@@ -1,8 +1,8 @@
 import { auth } from "../firebase";
 
 const style = {
-  button: `rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600 flex items-center justify-center`,
-  icon: `h-5 w-5`,
+  button: `rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600 cursor-pointer`,
+  icon: `h-5 w-10`,
 };
 
 const SignOutButton = () => {
