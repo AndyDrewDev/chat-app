@@ -7,10 +7,10 @@ import { auth } from "./firebase";
 import { useState, useEffect } from "react";
 
 const style = {
-  appContainer: `max-w-[1024px] mx-auto px-4 relative`,
-  mainContent: `flex flex-col md:flex-row gap-4 flex-1 overflow-hidden h-[89vh] md:h-[calc(100vh-20px)]`,
-  chatContainer: `flex-1 relative mt-0 md:mt-10 flex flex-col border-none bg-gray-100 shadow-xl overflow-auto`,
-  usersContainer: `mt-2 md:mt-10`,
+  appContainer: `bg-gray-100`,
+  mainContent: ` flex justify-center gap-4 h-dvh md:mx-4`,
+  chatContainer: `relative flex flex-col shadow-xl w-full md:w-3xl`,
+  usersContainer: `mt-16`,
   mobileUsersOverlay: `fixed inset-0 bg-black/25 z-20 transition-opacity duration-300 ease-in-out`,
   mobileUsersPanel: `rounded-l-xl fixed right-0 top-0 h-full w-3/4 max-w-xs z-30 transform transition-transform duration-300 ease-in-out bg-gray-800 shadow-xl`,
 };

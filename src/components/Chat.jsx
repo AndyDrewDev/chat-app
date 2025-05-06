@@ -5,8 +5,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useMessages } from "../hooks/useMessages";
 
 const style = {
-  main: `flex flex-col p-[5px] md:p-[10px] relative overflow-y-scroll h-[calc(100vh-170px)] md:h-full`,
-  welcomeMessage: `flex justify-center items-center h-full text-gray-500 text-center p-4 text-sm md:text-base`,
+  main: `p-3 relative overflow-y-auto h-full`,
+  welcomeMessage: `flex items-center justify-center text-gray-500 text-center p-4 text-base h-full `,
 };
 
 const audio = new Audio("/src/audio/tone.mp3");
@@ -31,7 +31,7 @@ const Chat = () => {
     return (
       <div className={style.main}>
         <div className={style.welcomeMessage}>
-          <p>Будь ласка, увійдіть до системи, щоб почати спілкування</p>
+          <p>Будь ласка, увійдіть, щоб почати спілкування</p>
         </div>
       </div>
     );

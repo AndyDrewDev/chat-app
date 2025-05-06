@@ -6,12 +6,12 @@ import SignIn from "./SignIn";
 import LogOut from "./SignOutButton";
 
 const style = {
-  nav: `relative sticky top-0 z-10 mb-0 flex h-auto min-h-[64px] items-center rounded-b-lg bg-gray-800 p-2 md:rounded-lg md:p-4`,
+  nav: `sticky top-0 flex min-h-[64px] items-center rounded-b-lg bg-gray-800 p-2 md:p-4`,
   heading: `text-white text-xl md:text-2xl font-bold absolute left-1/2 transform -translate-x-1/2`,
-  userContainer: `flex-shrink-0 ml-0`,
+  userContainer: ``,
   actionButtons: `flex items-center gap-2 md:gap-4 ml-auto`,
-  userIcon: `rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600 flex items-center justify-center cursor-pointer`,
-  icon: `h-5 w-5`,
+  userIcon: `rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600 cursor-pointer`,
+  icon: `h-5 w-10`,
 };
 
 const Navbar = ({ toggleUsers }) => {
