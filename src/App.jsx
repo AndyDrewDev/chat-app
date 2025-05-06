@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 const style = {
   appContainer: `bg-gray-100`,
-  mainContent: ` flex justify-center gap-4 h-screen md:mx-4`,
+  mainContent: ` flex justify-center gap-4 h-dvh md:mx-4`,
   chatContainer: `relative flex flex-col shadow-xl w-full md:w-3xl`,
   usersContainer: `mt-16`,
   mobileUsersOverlay: `fixed inset-0 bg-black/25 z-20 transition-opacity duration-300 ease-in-out`,
