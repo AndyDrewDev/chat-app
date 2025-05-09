@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import EmojiPicker from "emoji-picker-react";
 import EmojiButton from "./EmojiButton";
 import { sendMessageToDb } from "../utils/sendMessageToDb";
+import { useOnlineStatus } from "../hooks/useOnlineStatus";
 
 const style = {
   form: `w-full bg-gray-800 p-2 md:p-3 text-base md:text-xl rounded-t-lg sticky bottom-0`,
@@ -16,6 +17,7 @@ const SendMessage = () => {
   const [input, setInput] = useState("");
   const [isOpenPicker, setIsOpenPicker] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const { updateLastSeen } = useOnlineStatus();
 
   useEffect(() => {
     const checkMobile = () => {
@@ -36,6 +38,7 @@ const SendMessage = () => {
       !isMobile
     ) {
       e.preventDefault();
+      updateLastSeen();
       await sendMessage(e);
     } else if (
       (e.key === "Enter" && e.ctrlKey) ||
@@ -54,6 +57,9 @@ const SendMessage = () => {
     if (input.trim() === "") {
       alert("Please enter a valid message");
       return;
+    }
+    if (e.type === "submit") {
+      updateLastSeen();
     }
     await sendMessageToDb(input);
     setInput("");

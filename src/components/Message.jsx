@@ -36,17 +36,11 @@ const Message = ({ message }) => {
   const renderUserPhoto = () => {
     if (photoURL) {
       return (
-        <img
-          src={photoURL}
-          alt="user photo"
-          className={style.userPhoto}
-        />
+        <img src={photoURL} alt="user photo" className={style.userPhoto} />
       );
     }
     return (
-      <div
-        className={`${style.userPhoto} ${style.photoPlaceholder}`}
-      >
+      <div className={`${style.userPhoto} ${style.photoPlaceholder}`}>
         {message.name?.charAt(0)?.toUpperCase() || "?"}
       </div>
     );
