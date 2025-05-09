@@ -10,6 +10,7 @@ const style = {
   userList: `flex flex-col gap-2 overflow-y-auto`,
   userItem: `flex items-center gap-2 p-2 bg-gray-600 rounded hover:bg-gray-500`,
   userPhoto: `h-8 w-8 rounded-full`,
+  userPhotoActive: `h-8 w-8 rounded-full border-2 border-green-500`,
   userName: `text-white font-medium truncate`,
   noUsers: `text-gray-300 text-center p-4`,
   loading: `text-gray-300 text-center p-4 animate-pulse`,
@@ -37,16 +38,24 @@ const UsersList = ({ isMobile, onClose }) => {
       );
     }
 
-    return users.map((user) => (
-      <div key={user.uid} className={style.userItem}>
-        <img
-          src={user.photoURL}
-          alt={user.displayName}
-          className={style.userPhoto}
-        />
-        <span className={style.userName}>{user.displayName}</span>
-      </div>
-    ));
+    return users.map((user) => {
+      const isActive =
+        user.lastSeen &&
+        new Date().getTime() - user.lastSeen.toDate().getTime() <=
+          5 * 60 * 1000;
+
+
+      return (
+        <div key={user.uid} className={style.userItem}>
+          <img
+            src={user.photoURL}
+            alt={user.displayName}
+            className={isActive ? style.userPhotoActive : style.userPhoto}
+          />
+          <span className={style.userName}>{user.displayName}</span>
+        </div>
+      );
+    });
   };
 
   return (

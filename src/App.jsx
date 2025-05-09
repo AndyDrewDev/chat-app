@@ -5,6 +5,7 @@ import SendMessage from "./components/SendMessage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase";
 import { useState, useEffect } from "react";
+import { useOnlineStatus } from "./hooks/useOnlineStatus";
 
 const style = {
   appContainer: `bg-gray-100`,
@@ -18,6 +19,9 @@ const style = {
 function App() {
   const [user] = useAuthState(auth);
   const [showUsers, setShowUsers] = useState(false);
+
+  // Use online status hook when user is authenticated
+  useOnlineStatus();
 
   // Close users panel when screen size changes to desktop
   useEffect(() => {
