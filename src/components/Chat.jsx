@@ -13,19 +13,16 @@ const style = {
 const Chat = () => {
   const scroll = useRef();
   const [user] = useAuthState(auth);
-  const { messages } = useMessages(); // хук тепер залежить від стану авторизації
+  const { messages } = useMessages();
   const [lastMessageId, setLastMessageId] = useState(null);
-  // Використовуємо хук для аудіо
   const { playSound } = useAudio("/audio/tone.mp3");
 
-  // Ефект для прокрутки і звукових сповіщень
   useEffect(() => {
     if (scroll.current && messages?.length > 0) {
       scroll.current.scrollIntoView({ behavior: "smooth" });
 
       const lastMessage = messages[messages.length - 1];
 
-      // Перевіряємо, що повідомлення насправді нове і не від поточного користувача
       if (
         lastMessage.id !== lastMessageId &&
         lastMessage.uid !== auth.currentUser?.uid

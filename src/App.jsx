@@ -20,10 +20,8 @@ function App() {
   const [user] = useAuthState(auth);
   const [showUsers, setShowUsers] = useState(false);
 
-  // Use online status hook when user is authenticated
   useOnlineStatus();
 
-  // Close users panel when screen size changes to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -48,7 +46,6 @@ function App() {
           {user && <SendMessage />}
         </section>
 
-        {/* Desktop Users List */}
         {user && (
           <div className={`${style.usersContainer} hidden md:block`}>
             <UsersList />
@@ -56,7 +53,6 @@ function App() {
         )}
       </div>
 
-      {/* Mobile Users Overlay - відображати тільки коли панель відкрита */}
       {user && (
         <div
           className={`${style.mobileUsersOverlay} ${showUsers ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
@@ -64,7 +60,6 @@ function App() {
         ></div>
       )}
 
-      {/* Mobile Users Panel - завжди присутня в DOM, але переміщується за допомогою transform */}
       {user && (
         <div
           className={`${style.mobileUsersPanel} ${

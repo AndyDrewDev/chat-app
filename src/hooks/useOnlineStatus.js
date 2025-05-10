@@ -15,16 +15,13 @@ export const useOnlineStatus = () => {
   useEffect(() => {
     if (!auth.currentUser) return;
 
-    // Update last seen on initial load
     updateLastSeen();
 
-    // Update last seen when user interacts with the page
     const events = ["touchstart"];
     events.forEach((event) => {
       window.addEventListener(event, updateLastSeen);
     });
 
-    // Update last seen every minute while user is active
     const interval = setInterval(updateLastSeen, 5 * 60 * 1000);
 
     return () => {

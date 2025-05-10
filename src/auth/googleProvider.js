@@ -8,7 +8,6 @@ export const googleSignIn = async () => {
     const result = await signInWithPopup(auth, provider);
     const user = result.user
         
-    // Add or update user in firestore
     await setDoc(doc(db, 'users', user.uid), {
       uid: user.uid,
       displayName: user.displayName,

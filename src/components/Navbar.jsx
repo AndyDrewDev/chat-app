@@ -36,7 +36,7 @@ const Navbar = ({ toggleUsers }) => {
           <User />
         </div>
       ) : (
-        <div></div> // Порожній елемент для збереження структури, коли користувач не авторизований
+        <div></div> // Empty element to preserve structure when user is not authenticated
       )}
 
       <h1 className={style.heading}>Chat App</h1>

@@ -14,15 +14,12 @@ export const useUsers = (filterActive = false) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Вважаємо користувача активним, якщо він був у мережі не більше 5 хвилин тому
     const activeTimeLimit = Timestamp.fromDate(
       new Date(Date.now() - 5 * 60 * 1000),
     );
 
-    // Створюємо базовий запит
     let q = query(collection(db, "users"));
 
-    // Якщо запитуються тільки активні користувачі, додаємо фільтр
     if (filterActive) {
       q = query(
         collection(db, "users"),
