@@ -16,6 +16,15 @@ export const useAudio = (soundUrl) => {
 
     // Для iOS потрібна взаємодія користувача
     const initAudio = () => {
+      // Не ініціалізуємо аудіо повторно, якщо воно вже ініціалізовано
+      if (audioInitialized) {
+        return;
+      }
+
+      // Видаляємо обробники перед спробою ініціалізації
+      document.removeEventListener("click", initAudio);
+      document.removeEventListener("touchstart", initAudio);
+
       // Спроба відтворити і одразу зупинити для ініціалізації на iOS
       audioRef.current
         .play()
@@ -26,23 +35,24 @@ export const useAudio = (soundUrl) => {
         })
         .catch((err) => {
           console.log("Аудіо не ініціалізовано:", err);
+          // Додаємо обробники назад, якщо ініціалізація не вдалась
+          document.addEventListener("click", initAudio);
+          document.addEventListener("touchstart", initAudio);
         });
-
-      // Видаляємо обробник після першої взаємодії
-      document.removeEventListener("click", initAudio);
-      document.removeEventListener("touchstart", initAudio);
     };
 
-    // Додаємо обробники для подій користувача
-    document.addEventListener("click", initAudio);
-    document.addEventListener("touchstart", initAudio);
+    // Додаємо обробники для подій користувача лише якщо аудіо не ініціалізовано
+    if (!audioInitialized) {
+      document.addEventListener("click", initAudio);
+      document.addEventListener("touchstart", initAudio);
+    }
 
     return () => {
       // Очищаємо обробники при розмонтуванні
       document.removeEventListener("click", initAudio);
       document.removeEventListener("touchstart", initAudio);
     };
-  }, [soundUrl]);
+  }, [soundUrl, audioInitialized]);
 
   // Функція для відтворення звуку
   const playSound = () => {

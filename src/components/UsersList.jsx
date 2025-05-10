@@ -44,7 +44,6 @@ const UsersList = ({ isMobile, onClose }) => {
         new Date().getTime() - user.lastSeen.toDate().getTime() <=
           5 * 60 * 1000;
 
-
       return (
         <div key={user.uid} className={style.userItem}>
           <img
