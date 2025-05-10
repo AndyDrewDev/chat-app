@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Message from "./Message";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,21 +12,29 @@ const style = {
 
 const Chat = () => {
   const scroll = useRef();
-  const { messages } = useMessages();
   const [user] = useAuthState(auth);
+  const { messages } = useMessages(); // хук тепер залежить від стану авторизації
+  const [lastMessageId, setLastMessageId] = useState(null);
   // Використовуємо хук для аудіо
   const { playSound } = useAudio("/audio/tone.mp3");
 
+  // Ефект для прокрутки і звукових сповіщень
   useEffect(() => {
     if (scroll.current && messages?.length > 0) {
       scroll.current.scrollIntoView({ behavior: "smooth" });
 
-      // Відтворення звуку при отриманні нового повідомлення від іншого користувача
-      if (messages[messages.length - 1].uid !== auth.currentUser?.uid) {
+      const lastMessage = messages[messages.length - 1];
+
+      // Перевіряємо, що повідомлення насправді нове і не від поточного користувача
+      if (
+        lastMessage.id !== lastMessageId &&
+        lastMessage.uid !== auth.currentUser?.uid
+      ) {
         playSound();
+        setLastMessageId(lastMessage.id);
       }
     }
-  }, [messages, playSound]);
+  }, [messages, playSound, lastMessageId]);
 
   if (!user) {
     return (
